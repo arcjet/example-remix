@@ -37,7 +37,9 @@ export async function action(args: ActionFunctionArgs) {
   const formData = await args.request.formData();
   const email = formData.get("email") as string;
 
-  const decision = await aj.protect(args, { email });
+  // We use a custom fingerprint elsewhere, but here we just use the IP
+  const fingerprint = args.context.ip as string;
+  const decision = await aj.protect(args, { email, fingerprint });
 
   console.log("Arcjet decision: ", decision);
 

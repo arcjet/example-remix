@@ -23,7 +23,9 @@ const aj = arcjet
   );
 
 export async function loader(args: LoaderFunctionArgs) {
-  const decision = await aj.protect(args);
+  // We use a custom fingerprint elsewhere, but here we just use the IP
+  const fingerprint = args.context.ip as string;
+  const decision = await aj.protect(args, { fingerprint });
   console.log("Arcjet decision: ", decision);
 
   // Use the IP analysis to customize the response based on the country

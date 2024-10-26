@@ -13,7 +13,9 @@ const aj = arcjet.withRule(
 );
 
 export async function action(args: ActionFunctionArgs) {
-  const decision = await aj.protect(args);
+  // We use a custom fingerprint elsewhere, but here we just use the IP
+  const fingerprint = args.context.ip as string;
+  const decision = await aj.protect(args, { fingerprint });
 
   const formData = await args.request.formData();
   const supportMessage = formData.get("supportMessage") as string;

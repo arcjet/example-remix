@@ -3,10 +3,12 @@ import { json } from "@remix-run/node";
 import arcjet from "~/arcjet";
 
 export async function loader(args: LoaderFunctionArgs) {
-  // The Shield rule has already been added in the root Arcjet instance.
-  // Shield detects suspicious behavior, such as SQL injection and cross-site
-  // scripting attacks.
-  const decision = await arcjet.protect(args);
+  // We use a custom fingerprint elsewhere, but here we just use the IP
+  const fingerprint = args.context.ip as string;
+  // The Shield rule has already been added in the root Arcjet instance. Shield
+  // detects suspicious behavior, such as SQL injection and cross-site scripting
+  // attacks.
+  const decision = await arcjet.protect(args, { fingerprint });
   console.log("Arcjet decision: ", decision);
 
   if (decision.isDenied() && decision.reason.isShield()) {
