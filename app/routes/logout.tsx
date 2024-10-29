@@ -1,6 +1,7 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
+import { Button } from "~/components/ui/button";
 import { authenticator } from "~/services/auth.server";
 
 export async function loader() {
@@ -14,7 +15,7 @@ export async function action({ request }: ActionFunctionArgs) {
 export default function Logout() {
   return (
     <Form action="/logout" method="post">
-      <button>Logout</button>
+      <Button variant={"outline"}>Sign out</Button>
     </Form>
   );
 }

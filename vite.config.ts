@@ -9,6 +9,13 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
+    },
+  },
   plugins: [
     remix({
       future: {

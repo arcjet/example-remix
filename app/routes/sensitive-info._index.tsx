@@ -1,8 +1,32 @@
 import { sensitiveInfo } from "@arcjet/remix";
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, redirect, useActionData, useNavigation } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  redirect,
+  useActionData,
+  useNavigation,
+} from "@remix-run/react";
 import arcjet from "~/arcjet";
+import WhatNext from "~/components/compositions/WhatNext";
+import Divider from "~/components/elements/Divider";
+import { Button } from "~/components/ui/button";
+import { Label } from "~/components/ui/label";
+import { Textarea } from "~/components/ui/textarea";
+
+import styles from "~/components/elements/PageShared.module.scss";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Arcjet Remix sensitive info detection example" },
+    {
+      name: "description",
+      content:
+        "An example of Arcjet's sensitive info detection for Remix. Detect credit card numbers and other PII with Remix.",
+    },
+  ];
+};
 
 // Add rules to the base Arcjet instance outside of the handler function
 const aj = arcjet.withRule(
@@ -58,34 +82,99 @@ export default function Index() {
   const actionData = useActionData<typeof action>();
 
   return (
-    <Form method="post">
-      <fieldset disabled={navigation.state === "submitting"}>
-        <p>
-          <label>
-            Message:{" "}
-            <textarea
-              name="supportMessage"
-              defaultValue={
-                actionData
-                  ? actionData.values.supportMessage
-                  : "4111111111111111"
-              }
-            />
-          </label>
+    <section className={styles.Content}>
+      <div className={styles.Section}>
+        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+          Arcjet sensitive info detection example
+        </h1>
+        <p className="max-w-[700px] text-lg">
+          This form uses{" "}
+          <Link
+            to="https://docs.arcjet.com/sensitive-info/concepts"
+            className="font-bold decoration-1 underline-offset-2 hover:underline"
+          >
+            Arcjet&apos;s sensitive info detection
+          </Link>{" "}
+          feature which is configured to detect credit card numbers. It can be
+          configured to detect other types of sensitive information and custom
+          patterns.
         </p>
-
-        {actionData && actionData.errors.supportMessage ? (
-          <p style={{ color: "red" }}>
-            We could not submit your message: {actionData.errors.supportMessage}
-          </p>
-        ) : null}
-
-        <p>
-          <button type="submit">
-            {navigation.state === "submitting" ? "Submitting..." : "Submit"}
-          </button>
+        <p className="max-w-[700px] text-secondary-foreground">
+          The request is analyzed entirely on your server so no sensitive
+          information is sent to Arcjet.
         </p>
-      </fieldset>
-    </Form>
+      </div>
+
+      <Divider />
+
+      <div className={styles.Section}>
+        <h2 className="text-xl font-bold">Try it</h2>
+
+        <div className="flex gap-4">
+          <Form method="post" className="space-y-8">
+            <fieldset disabled={navigation.state === "submitting"}>
+              <Label>Message</Label>
+              <p>
+                <Textarea
+                  name="supportMessage"
+                  className="h-24 w-80 resize-none"
+                  defaultValue={
+                    actionData
+                      ? actionData.values.supportMessage
+                      : "4111111111111111"
+                  }
+                />
+              </p>
+              <br />
+              {actionData && actionData.errors.supportMessage ? (
+                <p className="text-red-400">
+                  We could not submit your message:{" "}
+                  {actionData.errors.supportMessage}
+                </p>
+              ) : null}
+
+              <p>
+                <Button type="submit">
+                  {navigation.state === "submitting"
+                    ? "Submitting..."
+                    : "Submit"}
+                </Button>
+              </p>
+            </fieldset>
+          </Form>
+        </div>
+      </div>
+
+      <Divider />
+
+      <div className={styles.Section}>
+        <h2 className="text-xl font-bold">See the code</h2>
+        <p className="text-secondary-foreground">
+          The{" "}
+          <Link
+            to="https://github.com/arcjet/example-remix/blob/main/app/routes/sensitive-info._index.tsx"
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold decoration-1 underline-offset-2 hover:underline"
+          >
+            API route
+          </Link>{" "}
+          imports a{" "}
+          <Link
+            to="https://github.com/arcjet/example-remix/blob/main/app/arcjet.ts"
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold decoration-1 underline-offset-2 hover:underline"
+          >
+            centralized Arcjet client
+          </Link>{" "}
+          which sets base rules.
+        </p>
+      </div>
+
+      <Divider />
+
+      <WhatNext />
+    </section>
   );
 }

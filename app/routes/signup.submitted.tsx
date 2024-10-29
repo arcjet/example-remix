@@ -1,13 +1,23 @@
+import WhatNext from "~/components/compositions/WhatNext";
+import Divider from "~/components/elements/Divider";
+
+import styles from "~/components/elements/PageShared.module.scss";
+
 export default function Index() {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="flex flex-col items-center gap-16">
-        <header className="flex flex-col items-center gap-9">
-          <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
-            Submitted!
-          </h1>
-        </header>
+    <section className={styles.Content}>
+      <div className={styles.Section}>
+        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+          Form submitted
+        </h1>
+        <p className="max-w-[700px] text-lg">
+          If this were a real form, your message would have been submitted.
+        </p>
       </div>
-    </div>
+
+      <Divider />
+
+      <WhatNext />
+    </section>
   );
 }

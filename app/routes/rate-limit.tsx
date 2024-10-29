@@ -1,17 +1,37 @@
 import { setRateLimitHeaders } from "@arcjet/decorate";
 import { fixedWindow } from "@arcjet/remix";
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Form,
+  Link,
   useActionData,
   useLoaderData,
   useNavigation,
 } from "@remix-run/react";
 import arcjet from "~/arcjet";
+import WhatNext from "~/components/compositions/WhatNext";
+import Divider from "~/components/elements/Divider";
 import { authenticator, User } from "~/services/auth.server";
 import Login from "./login";
 import Logout from "./logout";
+
+import styles from "~/components/elements/PageShared.module.scss";
+import { Button } from "~/components/ui/button";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Arcjet Remix rate limit example" },
+    {
+      name: "description",
+      content: "An example of Arcjet's rate limit for Remix.",
+    },
+  ];
+};
 
 // Returns ad-hoc rules depending on whether the session is present. You could
 // inspect more details about the session to dynamically adjust the rate limit.
@@ -142,34 +162,107 @@ export default function Index() {
   const user = data.user;
 
   return (
-    <div>
-      {user ? (
-        <div>
-          <p>
-            You are authenticated as {user.email}. Make a request using curl,
-            which is considered an automated client:
-          </p>
-          <Logout />
-        </div>
-      ) : (
-        <p>
-          You are not logged in.
-          <Login />
+    <section className={styles.Content}>
+      <div className={styles.Section}>
+        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+          Arcjet rate limiting example
+        </h1>
+        <p className="max-w-[700px] text-lg">
+          This page is protected by{" "}
+          <Link
+            to="https://docs.arcjet.com/bot-protection/concepts"
+            className="font-bold decoration-1 underline-offset-2 hover:underline"
+          >
+            Arcjet&apos;s rate limiting
+          </Link>
+          .
         </p>
-      )}
-      <Form method="post">
-        <fieldset disabled={navigation.state === "submitting"}>
-          {actionData && actionData.message ? (
-            <p style={{ color: "red" }}>{actionData.message}</p>
-          ) : null}
+      </div>
 
-          <p>
-            <button type="submit">
-              {navigation.state === "submitting" ? "Submitting..." : "Submit"}
-            </button>
-          </p>
-        </fieldset>
-      </Form>
-    </div>
+      <Divider />
+
+      <div className={styles.Section}>
+        <h2 className="text-xl font-bold">Try it</h2>
+        <Form method="post">
+          <fieldset disabled={navigation.state === "submitting"}>
+            {actionData && actionData.message ? (
+              <p className="text-red-400">
+                {actionData.message}
+                <br />
+                <br />
+              </p>
+            ) : null}
+
+            <p>
+              <Button type="submit">
+                {navigation.state === "submitting"
+                  ? "Submitting..."
+                  : "Test rate limit"}
+              </Button>
+            </p>
+          </fieldset>
+        </Form>
+
+        {user ? (
+          <>
+            <p className="text-green-500">
+              You are authenticated as {user.email}
+              <span className="text-secondary-foreground">
+                {" "}
+                - the limit is set to 5 requests every 60 seconds.
+              </span>
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-red-400">
+              You are not authenticated
+              <span className="text-secondary-foreground">
+                {" "}
+                - the limit is set to 2 requests every 60 seconds.
+              </span>
+            </p>
+          </>
+        )}
+
+        <p className="max-w-[700px] text-secondary-foreground">
+          Rate limits can be dynamically adjusted e.g. to set a limit based on
+          the authenticated user.
+        </p>
+
+        {user ? <Logout /> : <Login />}
+      </div>
+
+      <Divider />
+
+      <div className={styles.Section}>
+        <h2 className="text-xl font-bold">See the code</h2>
+        <p className="text-secondary-foreground">
+          The{" "}
+          <Link
+            to="https://github.com/arcjet/example-remix/blob/main/app/routes/rate-limit.tsx"
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold decoration-1 underline-offset-2 hover:underline"
+          >
+            API route
+          </Link>{" "}
+          imports a{" "}
+          <Link
+            to="https://github.com/arcjet/example-remix/blob/main/lib/arcjet.ts"
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold decoration-1 underline-offset-2 hover:underline"
+          >
+            centralized Arcjet client
+          </Link>{" "}
+          which sets base rules.
+        </p>
+      </div>
+
+      <Divider />
+
+      <WhatNext />
+    </section>
   );
 }
