@@ -1,42 +1,94 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+import WhatNext from "~/components/compositions/WhatNext";
+import Divider from "~/components/elements/Divider";
+import { buttonVariants } from "~/components/ui/button";
+
+import styles from "~/components/elements/PageShared.module.scss";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Arcjet Remix example app" },
+    {
+      name: "description",
+      content:
+        "An example Remix application protected by Arcjet. Bot detection. Rate limiting. Email validation. Attack protection. Data redaction. A developer-first approach to security.",
+    },
   ];
 };
 
 export default function Index() {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="flex flex-col items-center gap-16">
-        <header className="flex flex-col items-center gap-9">
-          <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
-            Arcjet Remix Example
+    <section className={styles.Content}>
+      <div className={styles.Section}>
+        <div className="flex max-w-[980px] flex-col items-start gap-6">
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Arcjet Remix example app
           </h1>
-        </header>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/signup">Signup form protection</Link>
-            </li>
-            <li>
-              <Link to="/bots">Bot protection</Link>
-            </li>
-            <li>
-              <Link to="/rate-limit">Rate limiting</Link>
-            </li>
-            <li>
-              <Link to="/attack">Attack protection</Link>
-            </li>
-            <li>
-              <Link to="/sensitive-info">Sensitive info</Link>
-            </li>
-          </ul>
-        </nav>
+          <p className="max-w-[700px] text-lg">
+            <Link
+              to="https://arcjet.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-bold decoration-1 underline-offset-2 hover:underline"
+            >
+              Arcjet
+            </Link>{" "}
+            helps developers protect their apps in just a few lines of code. Bot
+            detection. Rate limiting. Email validation. Attack protection. Data
+            redaction. A developer-first approach to security.
+          </p>
+          <p className="max-w-[700px] text-secondary-foreground">
+            This is an example Remix application using Arcjet. The code is{" "}
+            <Link
+              to="https://github.com/arcjet/example-remix"
+              target="_blank"
+              rel="noreferrer"
+              className="font-bold decoration-1 underline-offset-2 hover:underline"
+            >
+              on GitHub
+            </Link>
+            .
+          </p>
+        </div>
+
+        <div className="flex max-w-[980px] flex-col items-start gap-6 pt-8">
+          <h2 className="text-xl font-bold">Examples</h2>
+          <div className="flex gap-4">
+            <Link
+              to="/signup"
+              className={buttonVariants({ variant: "default" })}
+            >
+              Signup form protection
+            </Link>
+            <Link to="/bots" className={buttonVariants({ variant: "default" })}>
+              Bot protection
+            </Link>
+            <Link
+              to="/rate-limiting"
+              className={buttonVariants({ variant: "default" })}
+            >
+              Rate limiting
+            </Link>
+            <Link
+              to="/attack"
+              className={buttonVariants({ variant: "default" })}
+            >
+              Attack protection
+            </Link>
+            <Link
+              to="/sensitive-info"
+              className={buttonVariants({ variant: "default" })}
+            >
+              Sensitive info
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <Divider />
+
+      <WhatNext />
+    </section>
   );
 }
