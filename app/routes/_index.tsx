@@ -23,7 +23,13 @@ export default function Index() {
               <Link to="/signup">Signup form protection</Link>
             </li>
             <li>
-              <Link to="/bots">Bots protection</Link>
+              <Link to="/bots">Bot protection</Link>
+            </li>
+            <li>
+              <Link to="/rate-limit">Rate limiting</Link>
+            </li>
+            <li>
+              <Link to="/attack">Attack protection</Link>
             </li>
             <li>
               <Link to="/sensitive-info">Sensitive info</Link>

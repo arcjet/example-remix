@@ -21,7 +21,7 @@ export default function Index() {
         <div>
           <p>Make a request using curl</p>
           <code>
-            curl -v -H &quote;x-arcjet-suspicious: true&quote; {url.href}/test
+            curl -v -H &quot;x-arcjet-suspicious: true&quot; {url.href}/test
           </code>
         </div>
       </div>

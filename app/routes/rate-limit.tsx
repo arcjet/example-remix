@@ -10,8 +10,8 @@ import {
 } from "@remix-run/react";
 import arcjet from "~/arcjet";
 import { authenticator, User } from "~/services/auth.server";
-import Logout from "./logout";
 import Login from "./login";
+import Logout from "./logout";
 
 // Returns ad-hoc rules depending on whether the session is present. You could
 // inspect more details about the session to dynamically adjust the rate limit.
@@ -42,17 +42,24 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export async function action(args: ActionFunctionArgs) {
   const user = await authenticator.isAuthenticated(args.request);
-  const fingerprint = user?.email ?? (args.context.ip as string);
+
+  // If the user is logged in then we use their user ID as the fingerprint. This
+  // means the rate limit will track them across browsers. If the user is
+  // anonymous then we use their IP.
+  const fingerprint = user?.id ?? (args.context.ip as string);
   const decision = await getClient(user).protect(args, { fingerprint });
 
   console.log("Arcjet decision: ", decision);
 
+  // Return the RFC headers for rate limiting
+  // https://www.ietf.org/archive/id/draft-polli-ratelimit-headers-02.html
   const headers = new Headers();
   setRateLimitHeaders(headers, decision);
 
   let message = "";
   let remaining = 0;
 
+  // Display a more user-friendly message for rate limiting
   if (decision.reason.isRateLimit()) {
     const reset = decision.reason.resetTime;
     remaining = decision.reason.remaining;
