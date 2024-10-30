@@ -70,7 +70,7 @@ server](https://arcjet.com/discord).
 ## Stack
 
 - Auth: [Auth.js](https://authjs.dev/)
-- App: [Remix](https://nextjs.org/)
+- App: [Remix](https://remix.run/)
 - UI: [shadcn/ui](https://ui.shadcn.com/) + [Tailwind
   CSS](https://tailwindcss.com/)
 - Security: [Arcjet](https://arcjet.com/)
