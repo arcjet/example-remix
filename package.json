@@ -11,8 +11,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@arcjet/decorate": "1.0.0-alpha.28",
-    "@arcjet/remix": "1.0.0-alpha.28",
+    "@arcjet/decorate": "1.0.0-alpha.32",
+    "@arcjet/remix": "1.0.0-alpha.32",
     "@hookform/resolvers": "3.9.1",
     "@radix-ui/react-label": "2.1.0",
     "@radix-ui/react-slot": "1.1.0",
