@@ -1,6 +1,5 @@
 import { sensitiveInfo } from "@arcjet/remix";
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -53,10 +52,10 @@ export async function action(args: ActionFunctionArgs) {
       const errors = {
         supportMessage: "please do not include credit card numbers.",
       };
-      return json({ errors, values }, { status: 400 });
+      return Response.json({ errors, values }, { status: 400 });
     } else {
       const errors = { supportMessage: "forbidden" };
-      return json({ errors, values }, { status: 403 });
+      return Response.json({ errors, values }, { status: 403 });
     }
   } else if (decision.isErrored()) {
     console.error("Arcjet error:", decision.reason);
@@ -65,10 +64,16 @@ export async function action(args: ActionFunctionArgs) {
         supportMessage:
           "invalid Arcjet key. Is the ARCJET_KEY environment variable set?",
       };
-      return json({ errors, values: { supportMessage } }, { status: 500 });
+      return Response.json(
+        { errors, values: { supportMessage } },
+        { status: 500 },
+      );
     } else {
       const errors = { supportMessage: "internal server error" };
-      return json({ errors, values: { supportMessage } }, { status: 500 });
+      return Response.json(
+        { errors, values: { supportMessage } },
+        { status: 500 },
+      );
     }
   }
 

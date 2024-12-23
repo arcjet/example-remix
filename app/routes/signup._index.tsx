@@ -1,6 +1,5 @@
 import { protectSignup } from "@arcjet/remix";
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -93,13 +92,13 @@ export async function action(args: ActionFunctionArgs) {
       }
 
       const errors = { email: message };
-      return json({ errors, values }, { status: 400 });
+      return Response.json({ errors, values }, { status: 400 });
     } else if (decision.reason.isRateLimit()) {
       const reset = decision.reason.resetTime;
 
       if (reset === undefined) {
         const errors = { email: "too many requests. Please try again later." };
-        return json({ errors, values }, { status: 429 });
+        return Response.json({ errors, values }, { status: 429 });
       }
 
       // Calculate number of seconds between reset Date and now
@@ -110,16 +109,16 @@ export async function action(args: ActionFunctionArgs) {
         const errors = {
           email: `too many requests. Please try again in ${minutes} minutes.`,
         };
-        return json({ errors, values }, { status: 429 });
+        return Response.json({ errors, values }, { status: 429 });
       } else {
         const errors = {
           email: `too many requests. Please try again in ${seconds} seconds.`,
         };
-        return json({ errors, values }, { status: 429 });
+        return Response.json({ errors, values }, { status: 429 });
       }
     } else {
       const errors = { email: "forbidden" };
-      return json({ errors, values }, { status: 403 });
+      return Response.json({ errors, values }, { status: 403 });
     }
   } else if (decision.isErrored()) {
     console.error("Arcjet error:", decision.reason);
@@ -128,10 +127,10 @@ export async function action(args: ActionFunctionArgs) {
         email:
           "invalid Arcjet key. Is the ARCJET_KEY environment variable set?",
       };
-      return json({ errors, values: { email } }, { status: 500 });
+      return Response.json({ errors, values: { email } }, { status: 500 });
     } else {
       const errors = { email: "internal server error" };
-      return json({ errors, values: { email } }, { status: 500 });
+      return Response.json({ errors, values: { email } }, { status: 500 });
     }
   }
 

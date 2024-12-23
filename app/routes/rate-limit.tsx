@@ -5,7 +5,6 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -104,7 +103,7 @@ export async function action(args: ActionFunctionArgs) {
       const reset = decision.reason.resetTime;
 
       if (reset === undefined) {
-        return json(
+        return Response.json(
           { message: "too many requests. Please try again later." },
           { status: 429, headers },
         );
@@ -115,14 +114,14 @@ export async function action(args: ActionFunctionArgs) {
       const minutes = Math.ceil(seconds / 60);
 
       if (minutes > 1) {
-        return json(
+        return Response.json(
           {
             message: `too many requests. Please try again in ${minutes} minutes.`,
           },
           { status: 429, headers },
         );
       } else {
-        return json(
+        return Response.json(
           {
             message: `too many requests. Please try again in ${seconds} seconds.`,
           },
@@ -130,12 +129,12 @@ export async function action(args: ActionFunctionArgs) {
         );
       }
     } else {
-      return json({ message: "forbidden" }, { status: 403, headers });
+      return Response.json({ message: "forbidden" }, { status: 403, headers });
     }
   } else if (decision.isErrored()) {
     console.error("Arcjet error:", decision.reason);
     if (decision.reason.message == "[unauthenticated] invalid key") {
-      return json(
+      return Response.json(
         {
           message:
             "invalid Arcjet key. Is the ARCJET_KEY environment variable set?",
@@ -143,11 +142,14 @@ export async function action(args: ActionFunctionArgs) {
         { status: 500, headers },
       );
     } else {
-      return json({ message: "internal server error" }, { status: 500 });
+      return Response.json(
+        { message: "internal server error" },
+        { status: 500 },
+      );
     }
   }
 
-  return json(
+  return Response.json(
     { message: `HTTP 200: OK. ${remaining} requests remaining. ${message}` },
     { status: 200, headers },
   );

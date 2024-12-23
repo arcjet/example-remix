@@ -1,5 +1,4 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import arcjet from "~/arcjet";
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -12,12 +11,12 @@ export async function loader(args: LoaderFunctionArgs) {
   console.log("Arcjet decision: ", decision);
 
   if (decision.isDenied() && decision.reason.isShield()) {
-    return json({ message: "Forbidden" }, { status: 403 });
+    return Response.json({ message: "Forbidden" }, { status: 403 });
   } else if (decision.isErrored()) {
     console.error("Arcjet error:", decision.reason);
 
     if (decision.reason.message == "[unauthenticated] invalid key") {
-      return json(
+      return Response.json(
         {
           message:
             "Invalid Arcjet key. Is the ARCJET_KEY environment variable set?",
@@ -25,12 +24,12 @@ export async function loader(args: LoaderFunctionArgs) {
         { status: 500 },
       );
     } else {
-      return json(
+      return Response.json(
         { message: "Internal server error: " + decision.reason.message },
         { status: 500 },
       );
     }
   }
 
-  return json({ message: "Hello, world!" }, { status: 200 });
+  return Response.json({ message: "Hello, world!" }, { status: 200 });
 }
