@@ -65,7 +65,7 @@ export default function Index() {
               Bot protection
             </Link>
             <Link
-              to="/rate-limiting"
+              to="/rate-limit"
               className={buttonVariants({ variant: "default" })}
             >
               Rate limiting
