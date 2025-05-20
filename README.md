@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> [Remix is now React Router v7](https://remix.run/blog/incremental-path-to-react-19).
+
 <a href="https://arcjet.com" target="_arcjet-home">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://arcjet.com/logo/arcjet-dark-lockup-voyage-horizontal.svg">
