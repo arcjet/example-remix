@@ -26,26 +26,26 @@ updates:
       - dependency-name: postcss
         versions: [8.4.38]
       # remix will never support react 19
-      - dependency-name: "react"
+      - dependency-name: react
         versions: [">=19"]
-      - dependency-name: "react-dom"
+      - dependency-name: react-dom
         versions: [">=19"]
       - dependency-name: "@types/react"
         versions: [">=19"]
       - dependency-name: "@types/react-dom"
         versions: [">=19"]
       # remix will never support express 5
-      - dependency-name: "express"
+      - dependency-name: express
         versions: [">=5"]
       # remix-themes >=2 is for react-router v7
-      - dependency-name: "remix-themes"
+      - dependency-name: remix-themes
         versions: [">=2"]
       # plan to remove tailwindcss instead of updating to v4
-      - dependency-name: "tailwindcss"
+      - dependency-name: tailwindcss
         versions: [">=4"]
       # remix-auth >=4 is for react-router v7
-      - dependency-name: "remix-auth"
+      - dependency-name: remix-auth
         versions: [">=4"]
       # remix-auth-github >=3 is for remix-auth >=4
-      - dependency-name: "remix-auth-github"
+      - dependency-name: remix-auth-github
         versions: [">=3"]
