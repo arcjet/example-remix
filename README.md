@@ -5,6 +5,10 @@
   </picture>
 </a>
 
+> [!IMPORTANT]
+>
+> [Remix is now React Router v7](https://remix.run/blog/incremental-path-to-react-19).
+
 # Arcjet Remix example app
 
 [Arcjet](https://arcjet.com) helps developers protect their apps in just a few
