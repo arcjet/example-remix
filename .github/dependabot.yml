@@ -22,8 +22,6 @@ updates:
           - arcjet
           - "@arcjet/*"
     ignore:
-      - dependency-name: eslint
-        versions: [">=9"]
       # Errors on newer versions
       - dependency-name: postcss
         versions: [8.4.38]
