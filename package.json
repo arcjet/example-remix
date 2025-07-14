@@ -10,8 +10,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@arcjet/decorate": "1.0.0-beta.8",
-    "@arcjet/remix": "1.0.0-beta.8",
+    "@arcjet/decorate": "1.0.0-beta.9",
+    "@arcjet/remix": "1.0.0-beta.9",
     "@radix-ui/react-label": "2.1.7",
     "@radix-ui/react-slot": "1.2.3",
     "@remix-run/express": "2.16.8",
@@ -23,19 +23,19 @@
     "cross-env": "7.0.3",
     "express": "4.21.2",
     "isbot": "5.1.28",
-    "lucide-react": "0.523.0",
+    "lucide-react": "0.525.0",
     "morgan": "1.10.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "remix-auth": "3.7.0",
     "remix-auth-github": "2.0.0",
     "remix-themes": "1.6.1",
-    "tailwind-merge": "3.3.0",
+    "tailwind-merge": "3.3.1",
     "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
     "@remix-run/dev": "2.16.8",
-    "@types/react": "18.3.21",
+    "@types/react": "18.3.23",
     "@types/react-dom": "18.3.7",
     "autoprefixer": "10.4.21",
     "postcss": "8.5.6",
