@@ -50,3 +50,5 @@ updates:
       - dependency-name: remix-auth-github
         versions: [">=3"]
       # remix@2 will never support vite 7
+      - dependency-name: vite
+        versions: [">=7"]
