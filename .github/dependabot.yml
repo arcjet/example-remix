@@ -25,7 +25,7 @@ updates:
       # Errors on newer versions
       - dependency-name: postcss
         versions: [8.4.38]
-      # remix will never support react 19
+      # remix@2 will never support react 19
       - dependency-name: react
         versions: [">=19"]
       - dependency-name: react-dom
@@ -34,7 +34,7 @@ updates:
         versions: [">=19"]
       - dependency-name: "@types/react-dom"
         versions: [">=19"]
-      # remix will never support express 5
+      # remix@2 will never support express 5
       - dependency-name: express
         versions: [">=5"]
       # remix-themes >=2 is for react-router v7
@@ -49,3 +49,4 @@ updates:
       # remix-auth-github >=3 is for remix-auth >=4
       - dependency-name: remix-auth-github
         versions: [">=3"]
+      # remix@2 will never support vite 7
