@@ -10,7 +10,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@arcjet/decorate": "1.0.0-beta.9",
+    "@arcjet/decorate": "1.0.0-beta.11",
     "@arcjet/remix": "1.0.0-beta.9",
     "@radix-ui/react-label": "2.1.7",
     "@radix-ui/react-slot": "1.2.3",
