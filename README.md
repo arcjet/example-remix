@@ -1,13 +1,26 @@
+# 🚨 Archived: Remix → React Router Transition
+
+With the introduction of React Router v7, the Remix team has announced that the
+official upgrade path for existing Remix applications is to move to React Router
+v7, as described in their
+[announcement](https://remix.run/blog/react-router-v7).
+
+This example application has been **archived** and is no longer being updated.
+However, **we continue to fully support and maintain the [Remix
+SDK (`@arcjet/remix`)](https://www.npmjs.com/package/@arcjet/remix)**.
+
+For an up-to-date reference implementation that follows the new recommended
+direction, please see our [**React Router
+example**](https://github.com/arcjet/example-react-router).
+
+---
+
 <a href="https://arcjet.com" target="_arcjet-home">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://arcjet.com/logo/arcjet-dark-lockup-voyage-horizontal.svg">
     <img src="https://arcjet.com/logo/arcjet-light-lockup-voyage-horizontal.svg" alt="Arcjet Logo" height="128" width="auto">
   </picture>
 </a>
-
-> [!IMPORTANT]
->
-> [Remix is now React Router v7](https://remix.run/blog/incremental-path-to-react-19).
 
 # Arcjet Remix example app
 
