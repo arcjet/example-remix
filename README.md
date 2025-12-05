@@ -1,11 +1,17 @@
 # 🚨 Archived: Remix → React Router Transition
 
-With the introduction of React Router v7, the Remix team has announced that the official upgrade path for existing Remix applications is to move to React Router v7, as described in their [announcement](https://remix.run/blog/react-router-v7).
+With the introduction of React Router v7, the Remix team has announced that the
+official upgrade path for existing Remix applications is to move to React Router
+v7, as described in their
+[announcement](https://remix.run/blog/react-router-v7).
 
-This example application has been **archived** and is no longer being updated. However, **we continue to fully support and maintain the `@arcjet/remix` framework adapter**: [`@arcjet/remix` on npm](https://www.npmjs.com/package/@arcjet/remix).
+This example application has been **archived** and is no longer being updated.
+However, **we continue to fully support and maintain the [Remix
+SDK (`@arcjet/remix`)](https://www.npmjs.com/package/@arcjet/remix)**.
 
-For an up-to-date reference implementation that follows the new recommended direction, please see our **React Router example application**: [arcjet/example-react-router](https://github.com/arcjet/example-react-router).
-
+For an up-to-date reference implementation that follows the new recommended
+direction, please see our [**React Router
+example**](https://github.com/arcjet/example-react-router).
 
 ---
 
